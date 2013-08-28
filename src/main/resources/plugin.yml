@@ -1,0 +1,8 @@
+name: HallowGen
+version: "1.6.2-R0.1 R3"
+author: i2
+main: net.gatesofender.HallowGen.SPlugin
+prefix: "HallowGen"
+load: STARTUP
+loadbefore: [ Multiverse-Core, MyWorlds ]
+softdepend: [ GiantCaves ]
