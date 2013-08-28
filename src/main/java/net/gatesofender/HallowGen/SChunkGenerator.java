@@ -1,8 +1,5 @@
 package net.gatesofender.HallowGen;
 
-import net.gatesofender.giantcaves.Config;
-import net.gatesofender.giantcaves.GiantCavePopulator;
-import net.gatesofender.moresilverfish.SilverfishPopulator;
 import net.gatesofender.undergroundbiomes.UndergroundBiomePopulator;
 import net.minecraft.server.v1_6_R2.*;
 import net.minecraft.server.v1_6_R2.World;
@@ -66,17 +63,6 @@ public class SChunkGenerator extends ChunkGenerator {
         ArrayList<BlockPopulator> populators = new ArrayList<BlockPopulator>();
         populators.add(new SBlockPopulator());
 
-        try {
-            if (options.giantCaves) {
-                plugin.getLogger().info("Adding Giant Caves to world '" + world.getName() + "' with settings " + options.caveSettings);
-                Config caveConfig = parseCaveConfig(options.caveSettings);
-                populators.add(new GiantCavePopulator(plugin, caveConfig));
-            }
-        } catch (NoClassDefFoundError ex) {
-            plugin.getLogger().severe("Failed to locate Giant Caves plugin.");
-            plugin.getLogger().severe("Download from http://dev.bukkit.org/bukkit-plugins/giant-caves/");
-        }
-
         if (options.undergroundBiomes) {
             plugin.getLogger().info("Adding underground biomes to world '" + world.getName() + "'");
             populators.add(new UndergroundBiomePopulator());
@@ -84,24 +70,7 @@ public class SChunkGenerator extends ChunkGenerator {
             plugin.getLogger().info("Disabling underground biomes in world '" + world.getName() + "'");
         }
 
-        if (options.silverfish) {
-            plugin.getLogger().info("Adding silverfish colonies to world '" + world.getName() + "'");
-            populators.add(new SilverfishPopulator());
-        } else {
-            plugin.getLogger().info("Disabling silverfish colonies in world '" + world.getName() + "'");
-        }
-
-
         return populators;
-    }
-
-    private Config parseCaveConfig(String caveSettings) {
-        Map<String, Object> kv = new HashMap<String, Object>();
-        for(String setting : caveSettings.split(",")) {
-            String[] splits = setting.split("=");
-            kv.put(splits[0], splits[1]);
-        }
-        return new Config(kv);
     }
 
     private class SBlockPopulator extends BlockPopulator{

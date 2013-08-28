@@ -1,6 +1,6 @@
 package net.gatesofender.HallowGen;
 
-import net.gatesofender.giantcaves.GCPlugin;
+
 import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.libs.joptsimple.OptionException;
 import org.bukkit.craftbukkit.libs.joptsimple.OptionParser;
@@ -25,16 +25,6 @@ public class SPlugin extends JavaPlugin {
                         .withRequiredArg()
                         .ofType(Boolean.class)
                         .defaultsTo(true);
-
-                accepts("silverfish")
-                        .withRequiredArg()
-                        .ofType(Boolean.class)
-                        .defaultsTo(true);
-
-                accepts("giant-caves")
-                        .withOptionalArg()
-                        .ofType(String.class)
-                        .defaultsTo("sxz=500,sy=175,cutoff=65,miny=40,maxy=160");
             }
         };
 
@@ -43,9 +33,6 @@ public class SPlugin extends JavaPlugin {
 
             GeneratorOptions options = new GeneratorOptions();
             options.undergroundBiomes = (Boolean)optionSet.valueOf("underground-biomes");
-            options.silverfish = (Boolean)optionSet.valueOf("silverfish");
-            options.giantCaves = optionSet.has("giant-caves");
-            options.caveSettings = (String)optionSet.valueOf("giant-caves");
 
             return new SChunkGenerator(this, options);
         } catch (OptionException ex) {

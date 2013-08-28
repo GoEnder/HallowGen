@@ -5,4 +5,3 @@ main: net.gatesofender.HallowGen.SPlugin
 prefix: "HallowGen"
 load: STARTUP
 loadbefore: [ Multiverse-Core, MyWorlds ]
-softdepend: [ GiantCaves ]
